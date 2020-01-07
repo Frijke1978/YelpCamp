@@ -1,9 +1,9 @@
-var express = require("express"),
-    app = express(),
-    bodyParser = require("body-parser"),
-    mongoose = require("mongoose")
+var express     = require("express"),
+    app         = express(),
+    bodyParser  = require("body-parser"),
+    mongoose    = require("mongoose")
 
-mongoose.connect("mongodb://localhost/yelp_camp");
+mongoose.connect("mongodb://localhost/yelp_camp"); // will be created once we add stuff to the DB.
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
@@ -16,19 +16,19 @@ var campgroundSchema = new mongoose.Schema({
 
 var Campground = mongoose.model("Campground", campgroundSchema);
 
-Campground.create(
-    {
-        name: "Mountain Goat's Rest",
-        image: "https://cdn.pixabay.com/photo/2015/07/10/17/24/night-839807__480.jpg"
+// Campground.create(
+//     {
+//         name: "Mountain Goat's Rest",
+//         image: "https://cdn.pixabay.com/photo/2015/07/10/17/24/night-839807__480.jpg"
 
-    }, function(err, campground){
-        if(err){
-            console.log(err);
-        } else {
-            console.log("NEWLY ADDED CAMPGROUND: ");
-            console.log(campground);
-        }
-    });
+//     }, function(err, campground){
+//         if(err){
+//             console.log(err);
+//         } else {
+//             console.log("NEWLY ADDED CAMPGROUND: ");
+//             console.log(campground);
+//         }
+//     });
 
 // var campgrounds = [
 //     {name: "Salmon Creek", image: "https://cdn.pixabay.com/photo/2014/11/27/18/36/tent-548022__480.jpg"},
