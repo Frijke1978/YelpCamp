@@ -5,38 +5,17 @@ var express     = require("express"),
     Campground  = require("./models/campground"),
     seedDB      = require("./seeds")
 
-seedDB();
+
 mongoose.connect("mongodb://localhost/yelp_camp"); // will be created once we add stuff to the DB.
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-
-
-// Campground.create(
-//     {
-//         name: "Mountain Goat's Rest",
-//         image: "https://cdn.pixabay.com/photo/2015/07/10/17/24/night-839807__480.jpg",
-//         description: "This is a huge granite hill, no bathroom, no water. Beautiful granite!"
-
-//     }, function(err, campground){
-//         if(err){
-//             console.log(err);
-//         } else {
-//             console.log("NEWLY ADDED CAMPGROUND: ");
-//             console.log(campground);
-//         }
-//     });
-
-// var campgrounds = [
-//     {name: "Salmon Creek", image: "https://cdn.pixabay.com/photo/2014/11/27/18/36/tent-548022__480.jpg"},
-//     {name: "Granite Hill", image: "https://cdn.pixabay.com/photo/2016/11/21/15/14/camping-1845906__480.jpg"},
-//     {name: "Mountain Goat's Rest", image: "https://cdn.pixabay.com/photo/2015/07/10/17/24/night-839807__480.jpg"}
-// ]
+seedDB();
 
 app.get("/", function(req, res){
     res.render("landing");
 });
 
-// INDEX ROUTRE - Show all campgrounds
+// INDEX ROUTE - Show all campgrounds
 app.get("/campgrounds", function(req, res){
     // Get all the campgrounds from the DB
     Campground.find({}, function(err, allCampgrounds){
@@ -68,7 +47,7 @@ app.post("/campgrounds", function(req, res){
     });
 });
 
-//  NEW ROUTE - Show form to creaate a new campground
+//  NEW ROUTE - Show form to create a new campground
 app.get("/campgrounds/new", function(req, res){
     res.render("new");
 });
@@ -76,10 +55,11 @@ app.get("/campgrounds/new", function(req, res){
 // SHOW ROUTE - Shows more info about one campground
 app.get("/campgrounds/:id", function(req, res){
     // Find the campground with provided ID
-    Campground.findById(req.params.id, function(err, foundCampground){
+    Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
         if(err){
             console.log(err);
         } else {
+            console.log(foundCampground)
             // Render show template with that campground
             res.render("show", {campground: foundCampground});
         }
