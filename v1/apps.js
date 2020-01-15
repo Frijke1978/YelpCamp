@@ -10,6 +10,7 @@ var express     = require("express"),
 mongoose.connect("mongodb://localhost/yelp_camp"); // will be created once we add stuff to the DB.
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
 seedDB();
 
 app.get("/", function(req, res){
