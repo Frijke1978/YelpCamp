@@ -5,7 +5,7 @@ var Comment = require("../models/comment");
 
 
 // ====================
-// COMMENTS ROUTES
+// COMMENTS NEW
 // ====================
 
 router.get("/new", isLoggedIn, function(req, res) {
@@ -19,6 +19,9 @@ router.get("/new", isLoggedIn, function(req, res) {
     })
 });
 
+// ====================
+// COMMENTS CREATE
+// ====================
 router.post("/", isLoggedIn, function(req, res) {
     //lookup campground using ID
     Campground.findById(req.params.id, function(err, campground) {
@@ -39,6 +42,11 @@ router.post("/", isLoggedIn, function(req, res) {
     });
 
 });
+
+
+//==============
+// MIDDLEWARE
+//=============
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
