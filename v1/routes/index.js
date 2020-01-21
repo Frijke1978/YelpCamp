@@ -9,9 +9,9 @@ router.get("/", function(req, res) {
 });
 
 
-//  ===========
-// AUTH ROUTES
-//  ===========
+//  =================
+// AUTH/INDEX ROUTES
+//  =================
 
 // show register form
 router.get("/register", function(req, res) {
