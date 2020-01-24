@@ -91,9 +91,9 @@ router.delete("/:id", checkCampgroundOwnership, function(req, res) {
 });
 
 
-//=== === === ==
+//============
 // MIDDLEWARE
-//=============
+//============
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
