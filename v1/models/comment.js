@@ -12,13 +12,3 @@ var commentSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Comment", commentSchema);
-
-
-// var mongoose   = require("mongoose");
-
-// var commentSchema = mongoose.Schema({
-//     text: String,
-//     author: String
-// });
-
-// module.exports = mongoose.model("Comment", commentSchema);
