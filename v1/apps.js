@@ -16,7 +16,16 @@ var express = require("express"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index")
 
-mongoose.connect("mongodb://localhost/yelp_camp");
+// mongoose.connect("mongodb://localhost/yelp_camp");
+mongoose.connect('mongodb+srv://YelpCamper:dYnC3IarcIHXihGH@cluster0-hqui8.mongodb.net/test?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useCreateIndex: true
+}).then(() => {
+    console.log.log('Connected to DB!');
+}).catch(err => {
+    console.log('ERROR', err.message);
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
